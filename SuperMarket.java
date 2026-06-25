@@ -11,9 +11,10 @@ import java.util.Scanner;
  int[] userQuantity = new int[items.length];
  double[] userPrice = new double [items.length];
 
-
+   int productIndex = 0;
    int index = 0;
   int count = 1;
+
  System.out.println("Welcome To David Supermarket");
  System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
  System.out.println("List of our available products");
@@ -29,7 +30,7 @@ import java.util.Scanner;
   System.out.print("\nSelect between option 1-10 for what user bought: ");
   int option = input.nextInt();
 
-  if (option <= 0 || option > 10) {
+  while (option <= 0 || option > 10) {
   System.out.print("Invalid option. select between option 1-10: ");
   option = input.nextInt();
     }
@@ -70,6 +71,12 @@ import java.util.Scanner;
   System.out.print("\nHow many quantity did the customer buy: ");
   int quantity = input.nextInt();
 
+  userItems[productIndex] = items[option -1]; 
+  userQuantity[productIndex] = quantity;
+  userPrice[productIndex] = price[option -1];
+
+ productIndex++;
+
   
 
 
@@ -79,7 +86,7 @@ import java.util.Scanner;
   while (!choice.equalsIgnoreCase("yes") && !choice.equalsIgnoreCase("no")) {
   System.out.print("Invalid option. select yes or no");
 
-  System.out.print("Did the customer buy another product?: (yes/no): ");
+  System.out.print("\nDid the customer buy another product?: (yes/no): ");
   choice = input.next();
  
   
@@ -88,26 +95,26 @@ import java.util.Scanner;
  }
 
  double billTotal = 0;
+ System.out.println("========================================");
+ System.out.println("DAVID SUPERMARKET");
+ System.out.println("========================================");
+ System.out.printf("     %-12s %-12s %-12s%n", "ITEMS", "QUANTITY", "TOTAL");
+ System.out.println("----------------------------------------");
 
- System.out.println("\nDAVID SUPERMARKET");
- System.out.println("==============================");
- System.out.printf("%-12s %-12s %-12s%n", "ITEMS", "QUANTITY", "TOTAL");
- System.out.println("------------------------------");
-
- for (index = 0; index < userItems.length; index++) {
+ for (index = 0; index < productIndex; index++) {
 
  double total = userPrice[index] * userQuantity[index];
 
  billTotal += total;
 
-  System.out.printf("%-12s %-12d %-12.2f%n",userItems[index], userQuantity[index], total);
+  System.out.printf("     %-12s %-12d %-12.2f%n",userItems[index], userQuantity[index], total);
 } 
 
-System.out.println("------------------------------");
-System.out.printf("BILL TOTAL: %.2f%n", billTotal);
-System.out.println("==============================");
-System.out.println("Thanks for your patronage");
-System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+System.out.println("----------------------------------------");
+System.out.printf("         BILL TOTAL: %.2f%n", billTotal);
+System.out.println("========================================");
+System.out.println("   Thanks for your patronage");
+System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
 System.out.print("How much did the customer give you: ");
 double amountPaid = input.nextDouble(); 
